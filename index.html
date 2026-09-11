@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZAgpt</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#07060d;
+ color:white;
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial;
+}
+.app{
+ max-width:430px;
+ min-height:100vh;
+ margin:auto;
+ padding:20px 16px 100px;
+ background:radial-gradient(circle at top,#28104d,#0b0913 40%,#07060d);
+}
+.top{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+}
+.brand{
+ font-size:29px;
+ font-weight:800;
+}
+.brand span{color:#a76cff}
+.icon{font-size:25px;color:#b67cff}
+
+.hero{
+ display:flex;
+ gap:14px;
+ align-items:center;
+ margin:35px 5px 25px;
+}
+.logo{
+ width:65px;height:65px;
+ border-radius:20px;
+ display:grid;
+ place-items:center;
+ border:1px solid #8144e8;
+ box-shadow:0 0 25px #792fff66;
+}
+.logo b{
+ font-size:42px;
+ font-style:italic;
+ background:linear-gradient(135deg,#fff,#a96cff,#682cff);
+ -webkit-background-clip:text;
+ color:transparent;
+}
+h1{font-size:23px;margin:0 0 5px}
+.hero p{margin:0;color:#aaa2b9;font-size:14px;line-height:1.6}
+
+.tools{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:8px;
+}
+.tool{
+ background:#11101b;
+ color:#ddd;
+ border:1px solid #292333;
+ border-radius:15px;
+ padding:12px 4px;
+ font-size:12px;
+}
+.tool span{
+ display:block;
+ color:#a66cff;
+ font-size:21px;
+ margin-bottom:6px;
+}
+
+.box{
+ margin-top:18px;
+ background:#10101a;
+ border:1px solid #39314a;
+ border-radius:20px;
+ padding:13px;
+}
+textarea{
+ width:100%;
+ height:90px;
+ resize:none;
+ background:none;
+ border:0;
+ outline:0;
+ color:white;
+ font-size:16px;
+ font-family:inherit;
+}
+.bottom{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+}
+.send{
+ width:46px;
+ height:46px;
+ border:0;
+ border-radius:50%;
+ background:#8d45ff;
+ color:white;
+ font-size:22px;
+}
+h2{font-size:19px;margin:25px 4px 12px}
+.item{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ background:#11101a;
+ border:1px solid #211d2b;
+ border-radius:15px;
+ padding:13px;
+ margin-bottom:9px;
+}
+.item span{
+ width:38px;height:38px;
+ border-radius:11px;
+ background:#181421;
+ display:grid;
+ place-items:center;
+ color:#a66cff;
+}
+.item small{
+ display:block;
+ color:#81798d;
+ margin-top:4px;
+}
+nav{
+ position:fixed;
+ bottom:0;
+ left:50%;
+ transform:translateX(-50%);
+ width:min(430px,100%);
+ height:74px;
+ background:#0c0b13ee;
+ border-top:1px solid #25202f;
+ display:flex;
+ justify-content:space-around;
+ align-items:center;
+}
+nav div{
+ text-align:center;
+ color:#91899e;
+ font-size:11px;
+}
+nav b{
+ display:block;
+ font-size:21px;
+ margin-bottom:3px;
+}
+.plus{
+ width:52px;height:52px;
+ border-radius:50%;
+ display:grid;
+ place-items:center;
+ background:#8d45ff;
+ color:white;
+ font-size:27px!important;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="top">
+ <div class="icon">☰</div>
+ <div class="brand"><span>ZA</span>gpt</div>
+ <div class="icon">♛</div>
+</div>
+
+<div class="hero">
+ <div class="logo"><b>Z</b></div>
+ <div>
+  <h1>مرحباً بك!</h1>
+  <p>أنا ZAgpt، مساعدك الذكي دائماً.<br>اكتب ما تريد وسأساعدك.</p>
+ </div>
+</div>
+
+<div class="tools">
+ <button class="tool" onclick="writeText('أنشئ لي صورة')">
+  <span>▧</span>إنشاء صورة
+ </button>
+
+ <button class="tool" onclick="writeText('اكتب لي كود')">
+  <span>&lt;/&gt;</span>كتابة كود
+ </button>
+
+ <button class="tool" onclick="writeText('اشرح لي هذا الموضوع')">
+  <span>💡</span>شرح وتوضيح
+ </button>
+
+ <button class="tool" onclick="writeText('ساعدني في مستند')">
+  <span>▤</span>مستندات
+ </button>
+</div>
+
+<div class="box">
+ <textarea id="text" placeholder="اكتب طلبك هنا..."></textarea>
+
+ <div class="bottom">
+  <div>📎　🖼️　🌐</div>
+  <button class="send" onclick="send()">➤</button>
+ </div>
+</div>
+
+<h2>المحادثات الأخيرة</h2>
+
+<div class="item">
+ <span>▧</span>
+ <div>
+  <b>تصميم صورة</b>
+  <small>آخر محادثة...</small>
+ </div>
+</div>
+
+<div class="item">
+ <span>&lt;/&gt;</span>
+ <div>
+  <b>تطبيق آلة حاسبة</b>
+  <small>هذا هو كود التطبيق...</small>
+ </div>
+</div>
+
+<div class="item">
+ <span>💡</span>
+ <div>
+  <b>شرح مادة البرمجة</b>
+  <small>شرح مبسط للموضوع...</small>
+ </div>
+</div>
+
+</div>
+
+<nav>
+ <div><b>⌂</b>الرئيسية</div>
+ <div><b>▢</b>المحادثات</div>
+ <div><b class="plus">+</b></div>
+ <div><b>⊞</b>الأدوات</div>
+ <div><b>♙</b>الملف الشخصي</div>
+</nav>
+
+<script>
+function writeText(text){
+ document.getElementById("text").value=text;
+ document.getElementById("text").focus();
+}
+
+function send(){
+ let text=document.getElementById("text").value.trim();
+
+ if(!text){
+  alert("اكتب طلبك أولاً ✨");
+  return;
+ }
+
+ alert("تم استلام طلبك 🤖\n\nالخطوة القادمة: ربط ZAgpt بالذكاء الاصطناعي.");
+}
+</script>
+
+</body>
+</html>
